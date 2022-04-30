@@ -8,7 +8,8 @@ Any searches that the user has performed will be saved to local storage so that 
 
 ```Open Weather API Documentation: https://openweathermap.org/api/one-call-api```
 
-#### Technical Requirements
+### Technical Requirements
+
 ```
 GIVEN a weather dashboard with form inputs
 WHEN I search for a city
@@ -22,3 +23,13 @@ THEN I am presented with a 5-day forecast that displays the date, an icon repres
 WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 ```
+
+## Implementation
+
+**Revision 1:**
+The first thing we will focus on will be building on the homepage. 
+- Add html elements that will contain our data. 
+- Add CSS stylings to modify the layout of the page and to make sure that it is intuitive to use. 
+- Prep the HTML elements that will be used in our javascript. 
+
+(We will be using bootstrap to make it easier to create some of our HTML elements and to help with the formatting.)
