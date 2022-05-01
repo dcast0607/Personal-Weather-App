@@ -43,7 +43,7 @@ The first thing we will focus on will be building on the homepage.
 **Revision 3:**
 - Work out logic to store data in local storage (COMPLETED)
 - Work out logic to display last city searched onto local storage (COMPLETED)
-- Work out way to show 5 day forecast
+- Work out way to show 5 day forecast (COMPLETED)
 - Work out way to show user weather data when they click on city already searched
 - Work out way to show date to user next to city name (COMPLETED)
 
