@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Daniel's Personal Weather App</title>
+    <!--Adding stylesheets and linking to bootstrap, I'll be using various methods
+    to format the layout of the page. I'll be using regular CSS and bootstrap to make
+    these styling changes. -->
     <link rel="stylesheet" href="./Assets/css/reset.css" />
     <link rel="stylesheet" href="./Assets/css/styles.css" />
     <!-- Latest compiled and minified CSS -->
@@ -26,22 +29,25 @@
     <!--End of Homepage Container-->
 
     <!--Homepage container that holds our search bar and forecast details-->
+    <!--Search bar container-->
     <div class="container">
       <div class="row">
         <div class="col-sm-4">
           <container class="searchTextContainer">
             <span class="searchText"> Search for a city: </span>
             <div class="input-group">
-                    <div class="form-outline">
-                            <input type="search" id="form1" class="form-control-lg" />
-                        <label class="form-label" for="form1"></label>
-                    </div>
-                    <button id="searchButton" type="submit" class="btn btn-primary">
-                        <i class="fas fa-search searchButtonIcon">Search &#128269;</i>
-                    </button>
+              <div class="form-outline">
+                <input type="search" id="form1" class="form-control-lg" />
+                <label class="form-label" for="form1"></label>
+              </div>
+              <button id="searchButton" type="submit" class="btn btn-primary">
+                <i class="fas fa-search searchButtonIcon">Search &#128269;</i>
+              </button>
             </div>
           </container>
         </div>
+    <!--End of search bar container-->
+    <!--Current day forecast container-->
         <div class="col-sm-8 weatherDetailsContainer">
           <container>
             <span id="cityName" class="weatherForecastTitle"></span>
@@ -58,12 +64,12 @@
         </div>
       </div>
     </div>
+    <!--End of current day forecast container-->
     <!--End of homepage container that will hold our search bar and 
     forecast details-->
 
-    <!--Container that will hold our search history-->
-
-    <!--End of container that will hold our search history-->
+    <!--Container that will hold our search history. This container will have its
+    own column that will be used to display past searches to the end user.-->
     <div class="container">
       <div class="row">
         <div class="col-sm-4">
@@ -71,25 +77,28 @@
             <span class="pastSearchesTitle"> Past Searches: </span>
           </container>
           <container class="pastSearches">
-            <ul id="pastSearchesList">
-
-            </ul>
+            <ul id="pastSearchesList"></ul>
           </container>
+          <!--Adding a button that will allow us to dump the local storage.-->
+          <button id="clearLocalStorage" class="clearLocalStorageButton" type="button">Clear History</button>
         </div>
+    <!--End of container that will hold our search history-->
 
-        <!--Container that will hold our five day forecast-->
+        <!--Container that will hold our five day forecast. This container will be
+        used to format the data into two columns, this column will hold our 5 day
+        weather forecast data.-->
         <div class="col-sm-8">
           <container class="fiveDayForecastContainer">
             <span class="fiveDayForecastDetails"> 5 Day Forecast: </span>
           </container>
-          <container id="dailyForecastContainerBox">
-
-          </container>
+          <container id="dailyForecastContainerBox"> </container>
         </div>
       </div>
     </div>
 
     <!--End of container that holds five day forecast-->
+    <!--Adding my scripts here. Will be using JQuery, Moment.js, and my own personal
+    script to run the logic behind my personal weather app.-->
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
     <script src="./Assets/scripts/scripts.js"></script>

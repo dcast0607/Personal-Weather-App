@@ -157,4 +157,10 @@ function weatherSearch (e) {
         saveCityNameToLocalStorage(userEntry);
 }
 
+function clearPage() {
+    localStorage.clear();
+    location.reload();
+}
+
 $("#searchButton").click(weatherSearch);
+$("#clearLocalStorage").click(clearPage);
