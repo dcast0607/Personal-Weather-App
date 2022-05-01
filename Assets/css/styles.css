@@ -1,5 +1,121 @@
 * {
-    background-color: black;
+    background-color: white;
     padding: 0px;
     margin: 0px;
 }
+
+body {
+    background-color: white;
+}
+
+/*
+Header styling attributes
+*/
+.mainHeaderContainer {
+    background-image: linear-gradient(to right, rgb(64, 99, 214), rgb(105, 45, 105));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 75px;
+}
+
+.titleHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 48px;
+    color: black;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    background-image: linear-gradient(to right, rgb(64, 99, 214), rgb(105, 45, 105));
+    width: 100%;
+    height: 75px;
+}
+
+/*
+Search container styling attributes
+*/
+.searchTextContainer {
+    font-size: 32px;
+    color: black;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+}
+
+.searchText {
+    font-size: 32px;
+    color: black;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+}
+
+
+.searchButtonIcon {
+    width: 100px;
+    height: 45px;
+    font-size: 24px;
+    color: black;
+
+}
+
+/*
+Day Weather Forecast Container
+*/
+
+.weatherDetailsContainer {
+    border-color: black;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 2px;
+    position: relative;
+    top: 30px;
+}
+
+.weatherForecastTitle {
+    font-size: 32px;
+    text-align: Left;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+
+}
+
+/*
+Past Searches Container
+*/
+
+.searchHistoryContainer {
+    border-top: solid;
+    border-color: lightgray;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pastSearchesTitle {
+    font-size: 32px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+}
+
+/*
+Five Day Forecast Container
+*/
+
+.fiveDayForecastContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: solid;
+    border-color: lightgray;
+    margin-top: 20px;
+}
+
+.fiveDayForecastDetails {
+    font-size: 32px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+}
+

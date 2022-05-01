@@ -1,39 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Daniel's Personal Weather App</title>
-    <link rel="stylesheet" href="./Assets/css/reset.css">
-    <link rel="stylesheet" href="./Assets/css/styles.css">
+    <link rel="stylesheet" href="./Assets/css/reset.css" />
+    <link rel="stylesheet" href="./Assets/css/styles.css" />
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" 
-    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-</head>
-<body>
-    <container class="mainHeaderContainer">
-        <header>Weather Dashboard</header>
-    </container>
-    <container class="searchContainer">
-        <span>
-            Search for a city:
-        </span>
-    </container>
-    <container class="weatherDetailsContainer">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+  </head>
 
-    </container>
-    <container class="fiveDayForecastContainer">
-        <span>
-            5 Day Forecast:
-        </span>
-    </container>
-    <container class="searchHistoryContainer">
-        <span>
-            Past Searches:
-        </span>
-    </container>
+  <body>
+    <!--Homepage Header Container-->
+    <header>
+      <container class="mainHeaderContainer">
+        <span class="titleHeader">Weather Dashboard</span>
+      </container>
+    </header>
+    <!--End of Homepage Container-->
 
-<script src="./Assets/scripts/scripts.js"></script>
-</body>
+    <!--Homepage container that holds our search bar and forecast details-->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 ">
+          <container class="searchTextContainer">
+            <span class="searchText"> Search for a city: </span>
+            <div class="input-group">
+              <div class="form-outline">
+                <input type="search" id="form1" class="form-control-lg" />
+                <label class="form-label" for="form1"></label>
+              </div>
+              <button id="searchButton" type="button" class="btn btn-primary">
+                <i class="fas fa-search searchButtonIcon">Search &#128269;</i>
+              </button>
+            </div>
+          </container>
+        </div>
+        <div class="col-sm-8 weatherDetailsContainer">
+          <container>
+            <span id="cityName" class="weatherForecastTitle">San Diego</span>
+            <span id="currentDay" class="weatherForecastTitle">Placeholder</span>
+            <container class="cityDetailsContainer">
+                <ul id="cityWeatherDetails">
+                    <li id="cityTemperatureData">
+                        Temperature: 
+                    </li>
+                    <li id="cityWindData">
+                        Wind: 
+                    </li>
+                    <li id="cityHumidityData">
+                        Humidity: 
+                    </li>
+                    <li id="cityUVIndexData">
+                        UV Index: 
+                    </li>
+                </ul>
+            </container>
+          </container>
+        </div>
+      </div>
+    </div>
+    <!--End of homepage container that will hold our search bar and 
+    forecast details-->
+
+    <!--Container that will hold our search history-->
+
+    <!--End of container that will hold our search history-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <container class="searchHistoryContainer">
+                <span class="pastSearchesTitle"> Past Searches: </span>
+                </container>
+                <container class="pastSearches">
+                    <ul id="pastSearches">
+                        <li id="pastSearchedCity">
+                            Placeholder
+                        </li>
+                    </ul>
+                </container>
+            </div>
+
+            <!--Container that will hold our five day forecast-->
+            <div class="col-sm-8">
+                <container class="fiveDayForecastContainer">
+                <span class="fiveDayForecastDetails"> 5 Day Forecast: </span>
+                </container>
+            </div>
+        </div>
+    </div>
+
+    <!--End of container that holds five day forecast-->
+
+    <script src="./Assets/scripts/scripts.js"></script>
+  </body>
 </html>
