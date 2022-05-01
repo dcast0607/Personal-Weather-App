@@ -28,39 +28,31 @@
     <!--Homepage container that holds our search bar and forecast details-->
     <div class="container">
       <div class="row">
-        <div class="col-sm-4 ">
+        <div class="col-sm-4">
           <container class="searchTextContainer">
             <span class="searchText"> Search for a city: </span>
             <div class="input-group">
-              <div class="form-outline">
-                <input type="search" id="form1" class="form-control-lg" />
-                <label class="form-label" for="form1"></label>
-              </div>
-              <button id="searchButton" type="button" class="btn btn-primary">
-                <i class="fas fa-search searchButtonIcon">Search &#128269;</i>
-              </button>
+                    <div class="form-outline">
+                            <input type="search" id="form1" class="form-control-lg" />
+                        <label class="form-label" for="form1"></label>
+                    </div>
+                    <button id="searchButton" type="submit" class="btn btn-primary">
+                        <i class="fas fa-search searchButtonIcon">Search &#128269;</i>
+                    </button>
             </div>
           </container>
         </div>
         <div class="col-sm-8 weatherDetailsContainer">
           <container>
-            <span id="cityName" class="weatherForecastTitle">San Diego</span>
+            <span id="cityName" class="weatherForecastTitle"></span>
             <span id="currentDay" class="weatherForecastTitle">Placeholder</span>
             <container class="cityDetailsContainer">
-                <ul id="cityWeatherDetails">
-                    <li id="cityTemperatureData">
-                        Temperature: 
-                    </li>
-                    <li id="cityWindData">
-                        Wind: 
-                    </li>
-                    <li id="cityHumidityData">
-                        Humidity: 
-                    </li>
-                    <li id="cityUVIndexData">
-                        UV Index: 
-                    </li>
-                </ul>
+              <ul id="cityWeatherDetails">
+                <li id="cityTemperatureData">Temperature:</li>
+                <li id="cityWindData">Wind:</li>
+                <li id="cityHumidityData">Humidity:</li>
+                <li id="cityUVIndexData">UV Index:</li>
+              </ul>
             </container>
           </container>
         </div>
@@ -73,31 +65,29 @@
 
     <!--End of container that will hold our search history-->
     <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <container class="searchHistoryContainer">
-                <span class="pastSearchesTitle"> Past Searches: </span>
-                </container>
-                <container class="pastSearches">
-                    <ul id="pastSearches">
-                        <li id="pastSearchedCity">
-                            Placeholder
-                        </li>
-                    </ul>
-                </container>
-            </div>
-
-            <!--Container that will hold our five day forecast-->
-            <div class="col-sm-8">
-                <container class="fiveDayForecastContainer">
-                <span class="fiveDayForecastDetails"> 5 Day Forecast: </span>
-                </container>
-            </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <container class="searchHistoryContainer">
+            <span class="pastSearchesTitle"> Past Searches: </span>
+          </container>
+          <container class="pastSearches">
+            <ul id="pastSearches">
+              <li id="pastSearchedCity">Placeholder</li>
+            </ul>
+          </container>
         </div>
+
+        <!--Container that will hold our five day forecast-->
+        <div class="col-sm-8">
+          <container class="fiveDayForecastContainer">
+            <span class="fiveDayForecastDetails"> 5 Day Forecast: </span>
+          </container>
+        </div>
+      </div>
     </div>
 
     <!--End of container that holds five day forecast-->
-
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="./Assets/scripts/scripts.js"></script>
   </body>
 </html>
