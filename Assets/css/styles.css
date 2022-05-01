@@ -100,6 +100,21 @@ Past Searches Container
     font-weight: bold;
 }
 
+.searchedListItemContainer {
+    background-color: bisque;
+    border-radius: 3px;
+    border-style: solid;
+    border-color: salmon;
+    border-width: 1px;
+    padding: 3px;
+}
+
+.searchedListItem {
+    font-size: 24px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+}
+
 /*
 Five Day Forecast Container
 */
