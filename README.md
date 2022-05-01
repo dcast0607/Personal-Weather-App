@@ -26,10 +26,22 @@ THEN I am again presented with current and future conditions for that city
 
 ## Implementation
 
-**Revision 1:**
+**Revision 1:** (COMPLETED)
 The first thing we will focus on will be building on the homepage. 
-- Add html elements that will contain our data. 
-- Add CSS stylings to modify the layout of the page and to make sure that it is intuitive to use. 
-- Prep the HTML elements that will be used in our javascript. 
+- Add html elements that will contain our data. (COMPLETED)
+- Add CSS stylings to modify the layout of the page and to make sure that it is intuitive to use. (COMPLETED)
+- Prep the HTML elements that will be used in our javascript. (COMPLETED)
 
 (We will be using bootstrap to make it easier to create some of our HTML elements and to help with the formatting.)
+
+**Revision 2:** 
+- Work out the Javascript logic that will be used to fetch our data
+- Retrieve fetch response and console log it
+- Link search button to API, user input will be used to make request to API
+- API response is linked to HTML page
+
+**Revision 3:**
+- Test
+- Revise files
+- Refactor
+- Comment
