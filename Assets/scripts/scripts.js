@@ -11,10 +11,51 @@ var apiKey = "&appid=f6943a0dceb882e5c00760c15511ba9d";
 var units = "&units=imperial";
 
 
+function addFiveDayForecastData (data) {
+    var fiveDayResponseData = data;
+    console.log(fiveDayResponseData);
+    var dailyForecastContainer = `
+        <div id="dailyForecastGrid" class="dailyForecastGridContainer">
+
+        </div>
+    `
+    $("#dailyForecastContainerBox").append(dailyForecastContainer);
+
+    for (var i = 1; i < 6 ; i++) {
+        var isoDate = fiveDayResponseData.daily[i].dt;
+        var dateConverted = moment.unix(isoDate);
+        var dailyForecastContainerItems = `
+            <div class="grid-item">
+                <h4 class="dailyForecastHeader">${moment.unix(isoDate).format("MMMM Do, YYYY")}</h4>
+                <h4 class="dailyForecastHeader">&#x2601;</h4>
+                <ul>
+                    <li id="dailyForecastItemTemp${i}" class="dailyForecastItemStyling">Temperature: </li>
+                    <li id="dailyForecastItemWind${i}" class="dailyForecastItemStyling">Wind: </li>
+                    <li id="dailyForecastItemHumidity${i}" class="dailyForecastItemStyling">Humidity: </li>
+                </ul>
+            </div>
+        `
+        $("#dailyForecastGrid").append(dailyForecastContainerItems);
+    }
+
+    for (var i = 1; i < 6; i++) {
+        var fiveDayForecastTemp = "Temperature: " + fiveDayResponseData.daily[i].temp.day + "°F";
+        var fiveDayForecastWind = "Wind: " + fiveDayResponseData.daily[i].wind_speed + " MPH";
+        var fiveDayForecastHumidity = "Humidity: " + fiveDayResponseData.daily[i].humidity;
+        console.log(fiveDayForecastTemp);
+        console.log(fiveDayForecastWind);
+        console.log(fiveDayForecastHumidity);
+        $("#dailyForecastItemTemp"+ i).text(fiveDayForecastTemp);
+        $("#dailyForecastItemWind"+ i).text(fiveDayForecastWind);
+        $("#dailyForecastItemHumidity"+ i).text(fiveDayForecastHumidity);
+    }
+}
+
+
 function fetchFiveDayForecast (longitude, latitude) {
     var cityLongitude = "&lon=" + longitude;
     var cityLatitude = "lat=" + latitude;
-    var fetchFiveDayForecastEndpoint = fiveDayForecastBaseURL + cityLatitude + cityLongitude + excludeParameters + apiKey;
+    var fetchFiveDayForecastEndpoint = fiveDayForecastBaseURL + cityLatitude + cityLongitude + excludeParameters + units + apiKey;
     console.log(fetchFiveDayForecastEndpoint);
     var requestOptions = {
         method: 'GET',
@@ -25,8 +66,7 @@ function fetchFiveDayForecast (longitude, latitude) {
       .then(function(data) {
           fiveDayData = data;
           console.log(fiveDayData);
-        //   console.log(fiveDayData.current.uvi);
-        //   $("#cityUVIndexData").text("Five Day Forecast: " + fiveDayData.current.uvi);
+          addFiveDayForecastData(fiveDayData);
       })
       .catch(error => console.log('error', error));
 }

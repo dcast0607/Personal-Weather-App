@@ -134,3 +134,38 @@ Five Day Forecast Container
     font-weight: bold;
 }
 
+#dailyForecastGrid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: rgb(105, 45, 105);
+    padding: 10px;
+    border-style: solid;
+    border-radius: 8px;
+}
+
+.grid-item {
+    text-align: center;
+    background-image: linear-gradient(to right, rgb(64, 99, 214), rgb(105, 45, 105));
+}
+
+.dailyForecastHeader {
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    text-align: left;
+    background-color: whitesmoke;
+    border-style: solid;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+
+.dailyForecastItemStyling {
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    text-align: left;
+    background-color: whitesmoke;
+    border-style: solid;
+    border-radius: 3px;
+    margin-right: 5px;
+}
