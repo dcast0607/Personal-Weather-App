@@ -51,4 +51,4 @@ The first thing we will focus on will be building on the homepage.
 - Test
 - Revise files
 - Refactor
-- Comment
+- Comment (COMPLETED)

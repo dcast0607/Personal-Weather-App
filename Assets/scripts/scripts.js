@@ -1,6 +1,7 @@
 var apiData = null;
 var onecallData = null;
 var fiveDayData = null;
+var userEntry = null;
 var localStorageIndex = 1;
 var retrieveLocalStorageIndex = 1;
 var excludeParameters = "&exclude=current,minutely,hourly";
@@ -10,6 +11,26 @@ var fiveDayForecastBaseURL = "https://api.openweathermap.org/data/2.5/onecall?"
 var apiKey = "&appid=f6943a0dceb882e5c00760c15511ba9d";
 var units = "&units=imperial";
 
+function retrieveCityNameAddToPage (index, localStorageKeyValue) {
+    var localStorageKeyValueIndex = index;
+    console.log(localStorageKeyValueIndex);
+    var retrievedLocalStorageValue = localStorageKeyValue;
+    if (retrievedLocalStorageValue === null ) {
+        console.log("Done unloading local storage");
+    }
+    else {
+        var searchedCityListings = `
+        <li id="pastSearchesListItem${localStorageKeyValueIndex}" class="searchedListItem searchedListItemContainer">
+            <button id="localStorageKeyButton${localStorageKeyValueIndex}" type="button" class="searchedListItem searchedListItemContainer">
+            ${retrievedLocalStorageValue}
+            </button>
+        </li>
+    `
+    };
+$("#pastSearchesList").append(searchedCityListings);
+retrieveLocalStorageIndex++;
+$("#clearLocalStorage").removeClass("buttonVisibility");
+}
 
 function addFiveDayForecastData (data) {
     var fiveDayResponseData = data;
@@ -72,15 +93,16 @@ function fetchFiveDayForecast (longitude, latitude) {
 }
 
 function recordCityName () {
-    searchedCityNameData = window.localStorage.getItem("cityName" + retrieveLocalStorageIndex);
+    searchedCityNameData = window.localStorage.getItem("cityName" + localStorageIndex);
     console.log(searchedCityNameData);
     var searchedCityListings = `
-        <li id="pastSearchesListItem${retrieveLocalStorageIndex}" class="searchedListItem searchedListItemContainer">
+        <li id="pastSearchesListItem${localStorageIndex}" class="searchedListItem searchedListItemContainer">
             ${searchedCityNameData}
         </li>
     `
     $("#pastSearchesList").append(searchedCityListings);
     retrieveLocalStorageIndex++;
+    $("#clearLocalStorage").removeClass("buttonVisibility");
 };
 
 
@@ -88,9 +110,10 @@ function saveCityNameToLocalStorage(userEntry) {
     var cityName;
     cityName = decodeURIComponent(userEntry);
     console.log(cityName);
+    console.log(localStorageIndex);
     window.localStorage.setItem("cityName" + localStorageIndex, cityName);
-    localStorageIndex++;
     recordCityName();
+    localStorageIndex++;
 }
 
 function apiFetchUVIndex (longitude, latitude) {
@@ -136,31 +159,101 @@ function addResponseDataToPage (apiResponse) {
     fetchFiveDayForecast(responseData.coord.lon, responseData.coord.lat);
 }
 
-function weatherSearch (e) {
-    e.preventDefault();
-    var userEntry = $("#form1").val();
-    userEntry = encodeURI(userEntry);
-    var finalRequestUrl = weatherBaseURL + userEntry + units + apiKey;
+//Function below is used to construct the URL that we will be using to construct
+//our URL, once the URL has been constructed, we then make the request to the API.
+function makeCurrentWeatherAPIRequest (userEntry) { 
+    var encodedUserEntry = userEntry;
+    var finalRequestUrl = weatherBaseURL + encodedUserEntry + units + apiKey;
     var requestOptions = {
         method: 'GET',
         redirect: 'follow'
-      };
-      
-      fetch(finalRequestUrl, requestOptions)
+    };
+    //Retrieving response data and passing that data to a different function, the
+    //data from the API response will be used to populate data onto our webpage.
+    fetch(finalRequestUrl, requestOptions)
         .then(response => response.json())
         .then(function(data) {
             apiData = data;
             console.log(apiData);
+            //Data is passed over to a separate function. This function will parse
+            //through the data being returned and it will add this data to our page.
             addResponseDataToPage(apiData);
         })
-        .catch(error => console.log('error', error));
-        saveCityNameToLocalStorage(userEntry);
+        .catch(function (error) {
+            //When our request errors out, we display and error message to the user
+            //and ask them to try again.
+            window.alert("Invalid city name, please try again!");
+        });
 }
 
+//When the user clicks on the search function we call this function. The function
+//will first check if the user has entered a value, if the user has not entered
+//a value we will display an alert to the user to ask them to enter a city name. 
+function searchValidation (e) {
+    e.preventDefault();
+    //Checking null entry.
+    if ($("#form1").val() === "") {
+        window.alert("Please make sure that you enter a valid city.")
+    }
+    //If the user enters a valid entry, we fetch the current weather data from the
+    //Open Weather API. 
+    else {
+        //We are also encoding the user's input to make sure that
+        //we don't run into any random issues with white spaces.
+        userEntry = $("#form1").val();
+        userEntry = encodeURI(userEntry);
+        //Encoded user entry is being passed over to the function that will make our
+        //request.
+        makeCurrentWeatherAPIRequest(userEntry);
+        //When this is a new entry, we also save the query request to local storage
+        //so that it can be displayed to the user under the "Past Searches" container.
+        saveCityNameToLocalStorage(userEntry);
+    }
+}
+
+
+//Checks for data stored in local storage. The way I have structured the data is
+//store items in an order with an index value associated to them. Since the data 
+//is being stored in order, I really only need to just check if there's a value in
+//the first key. 
+function checkLocalStorageData () {
+    var localStorageKeyIndex = "cityName1";
+    var localStorageKeyValue = localStorage.getItem(localStorageKeyIndex);
+    if (localStorageKeyValue === null ) {
+        console.log("There's nothing in local storage.");
+    }
+    //When there is data in the first key, we cycle through the keys and user 
+    //another function to render the data on the page. 
+    else {
+        while (localStorageKeyValue) {
+            localStorageKeyValue = localStorage.getItem("cityName" + localStorageIndex);
+            retrieveCityNameAddToPage(localStorageIndex, localStorageKeyValue);
+            localStorageIndex++;
+        };
+    }; 
+    localStorageIndex = localStorageIndex - 1;
+    console.log(localStorageIndex);
+}
+
+//When the user clicks on the "clear storage" button we will dump the data that
+//exists in the local storage and reload the page. We will also add a "buttonVisibility"
+//class to the button to hide it when there is no local storage.
 function clearPage() {
     localStorage.clear();
     location.reload();
+    $("#clearLocalStorage").addClass("buttonVisibility");
 }
 
-$("#searchButton").click(weatherSearch);
+//The first event listener here is being used to look at the "search button"
+//found under the search city text box. When the user clicks on this button
+//it will initialize our app and trigger additional requests to fetch data
+//from the OpenWeather API and display that data to the user. The click of 
+//the button will call the "searchValidation" function.
+$("#searchButton").click(searchValidation);
+//The second event listener here is being used to give the user an option to
+//clear their local storage. 
 $("#clearLocalStorage").click(clearPage);
+//Creating a function that will check if there is any data in local storage, 
+//if there is data in local storage then we call a function to display this data
+//upon page load. 
+$(document).ready(checkLocalStorageData);
