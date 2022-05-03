@@ -11,24 +11,37 @@ var fiveDayForecastBaseURL = "https://api.openweathermap.org/data/2.5/onecall?"
 var apiKey = "&appid=f6943a0dceb882e5c00760c15511ba9d";
 var units = "&units=imperial";
 
+
+function pushLocalDataToPage() {
+    console.log($("#localStorageKeyButton").val());
+}
+
+//This function is called each time we retrieve a key and it's value from local storage.
+//We first check if the key has a value, if it does, we then print that information onto
+//the "Past Searches" section.
 function retrieveCityNameAddToPage (index, localStorageKeyValue) {
     var localStorageKeyValueIndex = index;
-    console.log(localStorageKeyValueIndex);
     var retrievedLocalStorageValue = localStorageKeyValue;
     if (retrievedLocalStorageValue === null ) {
         console.log("Done unloading local storage");
     }
+    //Using a template literal to create the element that will hold our local storage data.
     else {
         var searchedCityListings = `
         <li id="pastSearchesListItem${localStorageKeyValueIndex}" class="searchedListItem searchedListItemContainer">
-            <button id="localStorageKeyButton${localStorageKeyValueIndex}" type="button" class="searchedListItem searchedListItemContainer">
+            <button id="localStorageKeyButton${localStorageKeyValueIndex}" type="button" class="searchedListItem searchedListItemContainer"
+            value="${retrievedLocalStorageValue}">
             ${retrievedLocalStorageValue}
             </button>
         </li>
     `
     };
+    //Newly created template literal element is added to the parent item "pastSearchesList"
 $("#pastSearchesList").append(searchedCityListings);
+//Add counter to "retrieveLocalStorageIndex" to keep track of what elements are being created.
 retrieveLocalStorageIndex++;
+//If there is data is the "Past Searches" container, we make sure that the clear button
+//is visible.
 $("#clearLocalStorage").removeClass("buttonVisibility");
 }
 
@@ -46,7 +59,7 @@ function addFiveDayForecastData (data) {
         var isoDate = fiveDayResponseData.daily[i].dt;
         var dateConverted = moment.unix(isoDate);
         var dailyForecastContainerItems = `
-            <div class="grid-item">
+            <div id="grid-item${i}" class="grid-item">
                 <h4 class="dailyForecastHeader">${moment.unix(isoDate).format("MMMM Do, YYYY")}</h4>
                 <h4 class="dailyForecastHeader">&#x2601;</h4>
                 <ul>
@@ -143,17 +156,20 @@ function displayDate () {
     }, 1000)
 }
 
+//Clearing the last entry to make sure we don't keep populating new data on top
+//of existing data. Using the remove method to remove the container that is holding
+//the data that needs to be cleared.
+function clearLastEntry() {
+    $("#dailyForecastGrid").remove();
+}
+
 function addResponseDataToPage (apiResponse) {
+    clearLastEntry();
     displayDate();
     var responseData = apiResponse;
-    console.log(responseData);
-    console.log(responseData.name);
     $("#cityName").text(responseData.name);
-    console.log(responseData.main.temp);
     $("#cityTemperatureData").text("Temperate: " + responseData.main.temp + "°F");
-    console.log(responseData.wind.speed);
     $("#cityWindData").text("Wind: " + responseData.wind.speed + " MPH");
-    console.log(responseData.main.humidity);
     $("#cityHumidityData").text("Humidity: " + responseData.main.humidity);
     apiFetchUVIndex (responseData.coord.lon, responseData.coord.lat);
     fetchFiveDayForecast(responseData.coord.lon, responseData.coord.lat);
@@ -215,7 +231,7 @@ function searchValidation (e) {
 //Checks for data stored in local storage. The way I have structured the data is
 //store items in an order with an index value associated to them. Since the data 
 //is being stored in order, I really only need to just check if there's a value in
-//the first key. 
+//the first key. 👍
 function checkLocalStorageData () {
     var localStorageKeyIndex = "cityName1";
     var localStorageKeyValue = localStorage.getItem(localStorageKeyIndex);
@@ -230,14 +246,17 @@ function checkLocalStorageData () {
             retrieveCityNameAddToPage(localStorageIndex, localStorageKeyValue);
             localStorageIndex++;
         };
-    }; 
+    //Should only execute is there is data in the local storage. Our loop goes
+    //1 past the actual number of keys available in local storage. To keep our local
+    //keys and new keys in sync, we must decrease that index by 1. 
     localStorageIndex = localStorageIndex - 1;
-    console.log(localStorageIndex);
+    }; 
 }
 
 //When the user clicks on the "clear storage" button we will dump the data that
 //exists in the local storage and reload the page. We will also add a "buttonVisibility"
 //class to the button to hide it when there is no local storage.
+//Commented and Refactored 👍 
 function clearPage() {
     localStorage.clear();
     location.reload();
@@ -248,12 +267,15 @@ function clearPage() {
 //found under the search city text box. When the user clicks on this button
 //it will initialize our app and trigger additional requests to fetch data
 //from the OpenWeather API and display that data to the user. The click of 
-//the button will call the "searchValidation" function.
+//the button will call the "searchValidation" function. 
+//This is commented and refactored 👍 
 $("#searchButton").click(searchValidation);
 //The second event listener here is being used to give the user an option to
 //clear their local storage. 
+//This is commented and refactored 👍 
 $("#clearLocalStorage").click(clearPage);
 //Creating a function that will check if there is any data in local storage, 
 //if there is data in local storage then we call a function to display this data
-//upon page load. 
+//upon page load.
+//This is commented and refactored 👍  
 $(document).ready(checkLocalStorageData);

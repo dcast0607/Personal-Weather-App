@@ -163,6 +163,10 @@ local storage.
 Five Day Forecast Container
 */
 
+.dailyForecastVisibility {
+    display: none;
+}
+
 .fiveDayForecastContainer {
     display: flex;
     align-items: center;
